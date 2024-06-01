@@ -24,14 +24,14 @@ export default function Header({ headerText, headerIcon }) {
         name={headerIcon}
         size={24}
         color="#000"
-        onPress={() => navigation.navigate('Reminder')}
+        onPress={() => navigation.navigate('Notification')}
       />
       <FontAwesome
         name="bars"
         size={24}
         color="#000"
         style={{ marginHorizontal: "7%" }}
-        onPress={() => navigation.navigate('Reminder')}
+        onPress={() => navigation.navigate()}
       />
     </View>
   );

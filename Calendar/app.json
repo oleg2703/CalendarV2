@@ -23,6 +23,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "97bec048-39c8-4529-849b-3d3fe838f170"
+      }
+    },
+    "owner": "lebid2703"
   }
 }

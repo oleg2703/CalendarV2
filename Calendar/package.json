@@ -13,11 +13,14 @@
     "@react-native-picker/picker": "^2.7.5",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
+    "build": "^0.1.4",
+    "eas": "^0.1.0",
     "expo": "~51.0.9",
     "expo-linking": "^6.3.1",
     "expo-notifications": "~0.28.5",
     "expo-status-bar": "~1.12.1",
     "fontawesome": "^5.6.3",
+    "native-notify": "^4.0.4",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.74.1",
@@ -28,7 +31,9 @@
     "react-native-webview": "^13.10.2",
     "tailwind-rn": "^4.2.0",
     "tailwindcss-react-native": "^1.7.10",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "expo-device": "~6.0.2",
+    "expo-constants": "~16.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -95,23 +95,25 @@ const ScheduleApp = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1,  backgroundColor:"#E1F7F9" }}>
       <Header headerText={"Щоденник-Календар ФКНТ"} headerIcon={"bell-o"} />
-
-      <Text>Виберіть курс:</Text>
+    <View style={styles.container}>
+      <Text style={styles.titleUp}>Виберіть курс:</Text>
       <View style={styles.buttonContainer}>
         {renderCourseButtons()}
       </View>
 
-      {selectedCourse ? (
+    
         <>
-          <Text>Виберіть групу:</Text>
+          <Text style={styles.titleUp}>Виберіть групу:</Text>
           <View style={styles.buttonContainer}>
             {renderSpecialtyButtons()}
           </View>
         </>
-      ) : null}
+      
+      </View>
     </SafeAreaView>
+    
   );
 };
 
@@ -119,19 +121,28 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    marginVertical: 10,
+    justifyContent: 'safe center',
+    marginVertical: 14,
   },
   button: {
     backgroundColor: '#007BFF',
-    padding: 10,
+    padding: 15,
     margin: 5,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   buttonText: {
     color: '#FFF',
     fontSize: 16,
   },
+  titleUp:{
+    fontSize:23,
+  },
+  container:{
+    flex:1,
+    justifyContent:"space-between",
+    paddingVertical:"5%",
+
+  }
 });
 
 export default ScheduleApp;

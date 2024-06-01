@@ -10,7 +10,7 @@ export default function Header({ headerText, headerIcon }) {
     <View style={{
       flexDirection: 'row',
       width: "100%",
-      paddingTop: "12%",
+      paddingTop: "15%",
       paddingBottom: "3%",
       backgroundColor: '#B1E5E5',
       shadowColor: '#000',
@@ -19,7 +19,7 @@ export default function Header({ headerText, headerIcon }) {
       shadowRadius: 2,
       elevation: 5,
     }}>
-      <Text style={{ flex: 1, fontSize: 15 }}>{headerText}</Text>
+      <Text style={{ flex: 1, fontSize: 15,marginLeft:10 }}>{headerText}</Text>
       <FontAwesome
         name={headerIcon}
         size={24}

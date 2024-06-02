@@ -6,7 +6,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import HomeScreen from "../screens/HomeScreen";
 import UploadScreen from "../screens/UploadScreen";
 import Schedule from "../screens/Schedule";
-import RemiderScreen from "../screens/RemiderScreen";
+import NotificationScreen from "../screens/NotificationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +18,7 @@ const AppNavigator=()=> {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Upload" component={UploadScreen} />
           <Stack.Screen name="Schedule" component={Schedule} />
-          <Stack.Screen name="Reminder" component={RemiderScreen} />
+          <Stack.Screen name="Notification" component={NotificationScreen} />
         </Stack.Navigator>
     </NavigationContainer>
     </GestureHandlerRootView>

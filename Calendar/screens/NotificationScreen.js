@@ -1,67 +1,99 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Platform, StyleSheet } from 'react-native';
+// NotificationScreen.js
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import * as Notifications from 'expo-notifications';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import NotificationModal from '../components/NotificationModal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function NotificationScreen() {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [date, setDate] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [completedNotifications, setCompletedNotifications] = useState([]);
 
-  const handleScheduleNotification = async () => {
+  useEffect(() => {
+    loadNotifications();
+    const interval = setInterval(() => {
+      const now = new Date();
+      setNotifications(prev => {
+        const active = [];
+        const completed = [];
+        prev.forEach(notification => {
+          if (new Date(notification.dateTime) <= now) {
+            completed.push(notification);
+          } else {
+            active.push(notification);
+          }
+        });
+        if (completed.length > 0) {
+          setCompletedNotifications(prevCompleted => [...prevCompleted, ...completed]);
+        }
+        saveNotifications(active); // Save active notifications
+        return active;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const loadNotifications = async () => {
+    try {
+      const storedNotifications = await AsyncStorage.getItem('notifications');
+      if (storedNotifications) {
+        setNotifications(JSON.parse(storedNotifications));
+      }
+    } catch (error) {
+      console.error('Failed to load notifications.', error);
+    }
+  };
+
+  const saveNotifications = async (newNotifications) => {
+    try {
+      await AsyncStorage.setItem('notifications', JSON.stringify(newNotifications));
+    } catch (error) {
+      console.error('Failed to save notifications.', error);
+    }
+  };
+
+  const handleScheduleNotification = async (notification) => {
     const trigger = {
-      seconds: Math.ceil((date.getTime() - new Date().getTime()) / 1000),
+      seconds: Math.ceil((new Date(notification.dateTime).getTime() - new Date().getTime()) / 1000),
     };
 
     await Notifications.scheduleNotificationAsync({
       content: {
-        title,
-        body,
+        title: notification.title,
+        body: notification.body,
       },
       trigger,
     });
 
+    const newNotifications = [...notifications, notification];
+    setNotifications(newNotifications);
+    saveNotifications(newNotifications);
     alert('Notification scheduled!');
   };
 
-  const onChange = (event, selectedDate) => {
-    setShowDatePicker(false);
-    if (selectedDate) {
-      setDate(selectedDate);
-    }
-  };
+  const renderNotificationItem = ({ item }) => (
+    <View style={styles.notificationItem}>
+      <Text style={styles.notificationTitle}>{item.title}</Text>
+      <Text>{item.body}</Text>
+      <Text>{new Date(item.dateTime).toLocaleString()}</Text>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Title:</Text>
-      <TextInput
-        style={styles.input}
-        value={title}
-        onChangeText={setTitle}
-        placeholder="Enter title"
+      <Text style={styles.sectionTitle}>Active Notifications</Text>
+      <FlatList
+        data={notifications}
+        renderItem={renderNotificationItem}
+        keyExtractor={item => item.id}
       />
-      <Text style={styles.label}>Body:</Text>
-      <TextInput
-        style={styles.input}
-        value={body}
-        onChangeText={setBody}
-        placeholder="Enter body"
+      
+      <NotificationModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onSchedule={handleScheduleNotification}
       />
-      <Text style={styles.label}>Date and Time:</Text>
-      <View>
-        <Button title="Pick Date and Time" onPress={() => setShowDatePicker(true)} />
-        {showDatePicker && (
-          <DateTimePicker
-            value={date}
-            mode="datetime"
-            display="default"
-            onChange={onChange}
-            minimumDate={new Date()}
-          />
-        )}
-      </View>
-      <Button title="Schedule Notification" onPress={handleScheduleNotification} />
     </View>
   );
 }
@@ -71,16 +103,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 16,
+    marginTop: "10%",
   },
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
+  notificationItem: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    marginVertical: 10,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 8,
-    marginBottom: 16,
-    borderRadius: 4,
+  notificationTitle: {
+    fontWeight: 'bold',
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginVertical: 10,
   },
 });

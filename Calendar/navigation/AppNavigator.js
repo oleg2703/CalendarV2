@@ -7,6 +7,7 @@ import HomeScreen from "../screens/HomeScreen";
 import UploadScreen from "../screens/UploadScreen";
 import Schedule from "../screens/Schedule";
 import NotificationScreen from "../screens/NotificationScreen";
+import CalendarScreen from "../screens/CalendarScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,8 @@ const AppNavigator=()=> {
           <Stack.Screen name="Upload" component={UploadScreen} />
           <Stack.Screen name="Schedule" component={Schedule} />
           <Stack.Screen name="Notification" component={NotificationScreen} />
+          
+          <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         </Stack.Navigator>
     </NavigationContainer>
     </GestureHandlerRootView>

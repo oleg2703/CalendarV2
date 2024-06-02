@@ -31,7 +31,7 @@ export default function Header({ headerText, headerIcon }) {
         size={24}
         color="#000"
         style={{ marginHorizontal: "7%" }}
-        onPress={() => navigation.navigate()}
+        onPress={() => navigation.navigate("CalendarScreen")}
       />
     </View>
   );

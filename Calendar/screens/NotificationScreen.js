@@ -99,24 +99,5 @@ export default function NotificationScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 16,
-    marginTop: "10%",
-  },
-  notificationItem: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 10,
-    marginVertical: 10,
-  },
-  notificationTitle: {
-    fontWeight: 'bold',
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 10,
-  },
+ 
 });

@@ -44,15 +44,6 @@ const Header = () => {
           />
           <Text style={styles.menuText}>Контакти</Text>
         </View>
-        <View style={styles.menuItem}>
-          <FontAwesome
-            name="newspaper-o"
-            size={24}
-            color="#000"
-            onPress={() => navigation.navigate('Newsscreen')}
-          />
-          <Text style={styles.menuText}>Новини</Text>
-        </View>
       </View>
     </View>
   );

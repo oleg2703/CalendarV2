@@ -1,11 +1,18 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet ,Image} from 'react-native';
 import React from 'react';
 import Header from '../components/Header';
+import News from '../components/News';
 
 const MenuScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>MenuScreen</Text>
+      <Image
+        style={{ width: 170, height: 120,marginTop:"10%"}}
+        source={require("../assets/favicon.png")}
+      />
+      <Text>Щоденник календар ФКНТ</Text>
+      
+      <News style={{marginBottom:"10%"}}/>
       <Header style={styles.header} />
     </View>
   );
@@ -14,7 +21,10 @@ const MenuScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E1F7F9",
+    backgroundColor: "#fff",
+    justifyContent:"center",
+    alignItems:"center",
+    
   },
   header: {
     position: 'absolute',

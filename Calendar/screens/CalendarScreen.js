@@ -5,6 +5,8 @@ import { Card } from 'react-native-paper';
 import Header from '../components/Header';
 import AddEvent from '../components/AddEvent';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { setEvents, addEvent, deleteEvent } from '../redux/eventsSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const timeToString = (time) => {
@@ -13,7 +15,8 @@ const timeToString = (time) => {
 };
 
 export default function CalendarScreen() {
-  const [items, setItems] = useState({});
+  const items = useSelector((state) => state.events.items);
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(timeToString(new Date()));
 
@@ -35,79 +38,56 @@ export default function CalendarScreen() {
     try {
       const jsonValue = await AsyncStorage.getItem('@events');
       if (jsonValue != null) {
-        setItems(JSON.parse(jsonValue));
+        dispatch(setEvents(JSON.parse(jsonValue)));
       } else {
-        setItems({});
+        dispatch(setEvents({}));
       }
     } catch (e) {
       console.error('Error loading events from storage:', e);
     }
   };
 
-  const loadItems = (day) => {
-    setTimeout(() => {
-      const newItems = { ...items };
-      for (let i = -15; i < 85; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = timeToString(time);
-
-        if (!newItems[strTime]) {
-          newItems[strTime] = [];
-        }
-      }
-      setItems(newItems);
-    }, 1000);
+  const handleAddEvent = (title, description, date) => {
+    dispatch(addEvent({ title, description, date }));
+    saveEventsToStorage({ ...items, [date]: [...(items[date] || []), { name: title, description, height: 50, day: date }] });
   };
 
-  const addEvent = (title, description, date) => {
+  const handleDeleteEvent = (day, index) => {
     const newItems = { ...items };
-    if (!newItems[date]) {
-      newItems[date] = [];
+    newItems[day] = newItems[day].filter((_, i) => i !== index);
+    if (newItems[day].length === 0) {
+      delete newItems[day];
     }
-    newItems[date].push({
-      name: title,
-      description: description,
-      height: 50,
-      day: date
-    });
-    setItems(newItems);
+    dispatch(deleteEvent({ date: day, index }));
     saveEventsToStorage(newItems);
   };
+  
 
-  const deleteEvent = (day, index) => {
-    const newItems = { ...items };
-    newItems[day].splice(index, 1);
-    setItems(newItems);
-    saveEventsToStorage(newItems);
-  };
-
-  const renderItem = (item, index) => {
-    return (
-      <TouchableOpacity>
-        <Card style={styles.item}>
-          <Card.Content>
-            <View style={styles.itemContent}>
-              <View>
-                <Text>{item.name}</Text>
-                <Text>{item.description}</Text>
-              </View>
-              <TouchableOpacity onPress={() => deleteEvent(item.day, index)}>
-                <Ionicons name="trash" size={24} color="red" />
-              </TouchableOpacity>
+  const renderItem = (item, index) => (
+    <TouchableOpacity key={index}>
+      <Card style={styles.item}>
+        <Card.Content>
+          <View style={styles.itemContent}>
+            <View>
+              <Text>{item.name}</Text>
+              <Text>{item.description}</Text>
             </View>
-          </Card.Content>
-        </Card>
-      </TouchableOpacity>
-    );
-  };
+            <TouchableOpacity onPress={() => handleDeleteEvent(item.day, index)}>
+              <Ionicons name="trash" size={24} color="red" />
+            </TouchableOpacity>
+          </View>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
       <Agenda
         items={items}
-        loadItemsForMonth={loadItems}
+        loadItemsForMonth={() => {}}
         selected={selectedDate}
-        renderItem={(item, firstItemInDay, index) => renderItem(item, index)}
+        renderItem={renderItem}
         showClosingKnob={true}
         onDayPress={(day) => setSelectedDate(day.dateString)}
       />
@@ -119,7 +99,7 @@ export default function CalendarScreen() {
       <AddEvent
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        addEvent={addEvent}
+        addEvent={handleAddEvent}
         selectedDate={selectedDate}
       />
 

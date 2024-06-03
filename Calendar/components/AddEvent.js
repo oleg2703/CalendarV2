@@ -1,33 +1,17 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
+import { addEvent } from '../redux/eventsSlice';
 
-const AddEvent = ({ modalVisible, setModalVisible, addEvent, selectedDate }) => {
+const AddEvent = ({ modalVisible, setModalVisible, selectedDate }) => {
   const [eventTitle, setEventTitle] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [eventDate, setEventDate] = useState(selectedDate);
+  const dispatch = useDispatch();
 
-  const saveEventToStorage = async (newEvent) => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('@events');
-      let events = jsonValue != null ? JSON.parse(jsonValue) : {};
-
-      if (!events[selectedDate]) {
-        events[selectedDate] = [];
-      }
-      events[selectedDate].push(newEvent);
-
-      await AsyncStorage.setItem('@events', JSON.stringify(events));
-    } catch (error) {
-      console.error('Error saving event to storage:', error);
-    }
-  };
-
-  const handleAddEvent = async () => {
+  const handleAddEvent = () => {
     if (!eventTitle || !eventDescription || !eventDate) return;
-    const newEvent = { name: eventTitle, description: eventDescription, day: eventDate };
-    await saveEventToStorage(newEvent);
-    addEvent(eventTitle, eventDescription, eventDate);
+    dispatch(addEvent({ title: eventTitle, description: eventDescription, date: eventDate }));
     setEventTitle('');
     setEventDescription('');
     setEventDate(selectedDate);

@@ -4,14 +4,16 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import AppNavigator from "./navigation/AppNavigator";
-
+import store from './redux/store';
+import { Provider } from 'react-redux';
 const App = () => {
   
 
   return (
     <View style={{ flex: 1 }}>
+      <Provider store={store}>
       <AppNavigator />
-    
+      </Provider>
     </View>
   );
 };

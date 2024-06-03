@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, ScrollView, useWindowDimensions, StyleSheet } from 'react-native';
-import RenderHtml from 'react-native-render-html';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import cheerio from 'cheerio';
-import Header  from '../components/Header'
+import Header from '../components/Header';
 
 const News = () => {
   const [newsItems, setNewsItems] = useState([]);
@@ -12,19 +12,25 @@ const News = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://fcst.nau.edu.ua/news/');
-        const $ = cheerio.load(response.data);
+        const storedNews = await AsyncStorage.getItem('@newsItems');
+        if (storedNews !== null) {
+          setNewsItems(JSON.parse(storedNews));
+        } else {
+          const response = await axios.get('https://fcst.nau.edu.ua/news/');
+          const $ = cheerio.load(response.data);
 
-        const items = [];
-        $('.elementor-post__text').each((i, element) => {
-          const title = $(element).find('.elementor-post__title').text();
-          const meta = $(element).find('.elementor-post__meta-data').text();
-          const excerpt = $(element).find('.elementor-post__excerpt').text();
+          const items = [];
+          $('.elementor-post__text').each((i, element) => {
+            const title = $(element).find('.elementor-post__title').text();
+            const meta = $(element).find('.elementor-post__meta-data').text();
+            const excerpt = $(element).find('.elementor-post__excerpt').text();
 
-          items.push({ title, meta, excerpt });
-        });
+            items.push({ title, meta, excerpt });
+          });
 
-        setNewsItems(items);
+          setNewsItems(items);
+          await AsyncStorage.setItem('@newsItems', JSON.stringify(items));
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -44,7 +50,7 @@ const News = () => {
           </View>
         ))}
       </ScrollView>
-      <Header/>
+      <Header />
     </View>
   );
 };
@@ -53,7 +59,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    
   },
   newsItem: {
     marginBottom: 20,

@@ -12,46 +12,54 @@ const Teachers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://ccs.nau.edu.ua/pro-kafedry/teachers');
-        const $ = cheerio.load(response.data);
+        const fileUri = FileSystem.documentDirectory + 'contactTeachers.json';
+        const fileExists = await FileSystem.getInfoAsync(fileUri);
+        
+        if (fileExists.exists) {
+          const fileContents = await FileSystem.readAsStringAsync(fileUri);
+          setTeachers(JSON.parse(fileContents));
+        } else {
+          const response = await axios.get('http://ccs.nau.edu.ua/pro-kafedry/teachers');
+          const $ = cheerio.load(response.data);
 
-        const items = [];
-        const contentSections = $('.entry-content').children('p, div');
+          const items = [];
+          const contentSections = $('.entry-content').children('p, div');
 
-        let currentTeacher = null;
+          let currentTeacher = null;
 
-        contentSections.each((i, element) => {
-          if ($(element).is('p') && $(element).find('strong').length) {
-            if (currentTeacher) {
-              items.push(currentTeacher);
+          contentSections.each((i, element) => {
+            if ($(element).is('p') && $(element).find('strong').length) {
+              if (currentTeacher) {
+                items.push(currentTeacher);
+              }
+
+              const name = $(element).find('strong').text().trim();
+              let textNodes = $(element).contents().filter(function () {
+                return this.nodeType === 3; // 3 is the nodeType for text nodes
+              });
+
+              const positionText = textNodes.toArray().map(node => node.nodeValue).join(' ').trim();
+              const positionMatch = positionText.match(/Посада:([^,]*)/);
+              const degreeMatch = positionText.match(/Науковий ступінь, вчене звання:([^,]*)/);
+
+              const position = positionMatch ? positionMatch[1].trim() : '';
+              const degree = degreeMatch ? degreeMatch[1].trim() : '';
+
+              currentTeacher = { name, position, degree, email: '' };
+            } else if ($(element).is('p') && $(element).text().includes('@')) {
+              if (currentTeacher) {
+                currentTeacher.email = $(element).text().trim();
+              }
             }
+          });
 
-            const name = $(element).find('strong').text().trim();
-            let textNodes = $(element).contents().filter(function () {
-              return this.nodeType === 3; // 3 is the nodeType for text nodes
-            });
-
-            const positionText = textNodes.toArray().map(node => node.nodeValue).join(' ').trim();
-            const positionMatch = positionText.match(/Посада:([^,]*)/);
-            const degreeMatch = positionText.match(/Науковий ступінь, вчене звання:([^,]*)/);
-
-            const position = positionMatch ? positionMatch[1].trim() : '';
-            const degree = degreeMatch ? degreeMatch[1].trim() : '';
-
-            currentTeacher = { name, position, degree, email: '' };
-          } else if ($(element).is('p') && $(element).text().includes('@')) {
-            if (currentTeacher) {
-              currentTeacher.email = $(element).text().trim();
-            }
+          if (currentTeacher) {
+            items.push(currentTeacher);
           }
-        });
 
-        if (currentTeacher) {
-          items.push(currentTeacher);
+          setTeachers(items);
+          await saveDataToFile(items);
         }
-
-        setTeachers(items);
-        await saveDataToFile(items);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);

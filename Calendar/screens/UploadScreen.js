@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../components/Header';
 
 const { height } = Dimensions.get('window');
-
 const courses = {
   '1 курс': {
     '110 ,111 ,112': 'https://drive.google.com/file/d/1NygtjT3MhXnb_Hf234y5oRle_bIvi9pU/view',
@@ -60,6 +60,48 @@ const ScheduleApp = () => {
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
   const navigation = useNavigation();
 
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const course = await AsyncStorage.getItem('@selectedCourse');
+        const specialty = await AsyncStorage.getItem('@selectedSpecialty');
+        if (course) setSelectedCourse(course);
+        if (specialty) setSelectedSpecialty(specialty);
+      } catch (e) {
+        console.error('Error loading data:', e);
+      }
+    };
+    loadData();
+  }, []);
+
+  const saveSelection = async (course, specialty) => {
+    try {
+      if (course !== null) await AsyncStorage.setItem('@selectedCourse', course);
+      if (specialty !== null) await AsyncStorage.setItem('@selectedSpecialty', specialty);
+    } catch (e) {
+      console.error('Error saving data:', e);
+    }
+  };
+
+  const handleCourseChange = (course) => {
+    setSelectedCourse(course);
+    setSelectedSpecialty(''); // Clear the specialty selection
+    saveSelection(course, '');
+  };
+
+  const handleSpecialtyChange = (specialty) => {
+    setSelectedSpecialty(specialty);
+    saveSelection(null, specialty);
+    const selectedLink = courses[selectedCourse][specialty];
+    const injectedJavaScript = `
+      var meta = document.createElement('meta'); 
+      meta.name = 'viewport'; 
+      meta.content = 'width=device-width, initial-scale=0.47, maximum-scale=0.7, user-scalable=yes'; 
+      document.getElementsByTagName('head')[0].appendChild(meta);
+    `;
+    navigation.navigate('Schedule', { selectedLink, injectedJavaScript });
+  };
+
   const renderCourseButtons = () => {
     return Object.keys(courses).map((course) => (
       <TouchableOpacity key={course} style={styles.button} onPress={() => handleCourseChange(course)}>
@@ -75,23 +117,6 @@ const ScheduleApp = () => {
         <Text style={styles.buttonText}>{specialty}</Text>
       </TouchableOpacity>
     ));
-  };
-
-  const handleCourseChange = (course) => {
-    setSelectedCourse(course);
-    setSelectedSpecialty(''); // Clear the specialty selection
-  };
-
-  const handleSpecialtyChange = (specialty) => {
-    setSelectedSpecialty(specialty);
-    const selectedLink = courses[selectedCourse][specialty];
-    const injectedJavaScript = `
-      var meta = document.createElement('meta'); 
-      meta.name = 'viewport'; 
-      meta.content = 'width=device-width, initial-scale=0.47, maximum-scale=0.7, user-scalable=yes'; 
-      document.getElementsByTagName('head')[0].appendChild(meta);
-    `;
-    navigation.navigate('Schedule', { selectedLink, injectedJavaScript });
   };
 
   return (

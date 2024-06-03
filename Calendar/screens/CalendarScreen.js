@@ -19,6 +19,7 @@ export default function CalendarScreen() {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(timeToString(new Date()));
+  const [refresh, setRefresh] = useState(false);  // State to trigger re-render
 
   useEffect(() => {
     loadEvents();
@@ -48,22 +49,31 @@ export default function CalendarScreen() {
   };
 
   const handleAddEvent = (title, description, date) => {
+    const newEvent = { name: title, description, height: 50, day: date };
     dispatch(addEvent({ title, description, date }));
-    saveEventsToStorage({ ...items, [date]: [...(items[date] || []), { name: title, description, height: 50, day: date }] });
+    const updatedItems = { ...items, [date]: [...(items[date] || []), newEvent] };
+    saveEventsToStorage(updatedItems);
+    setRefresh(!refresh); // Trigger re-render
   };
 
   const handleDeleteEvent = (day, index) => {
-    const newItems = { ...items };
-    newItems[day] = newItems[day].filter((_, i) => i !== index);
-    if (newItems[day].length === 0) {
-      delete newItems[day];
+    console.log('Deleting event:', day, index); // Debug statement
+    if (typeof index !== 'number') {
+      console.error('Index is not a number:', index);
+      return;
     }
+    const updatedItems = { ...items };
+    updatedItems[day] = updatedItems[day].filter((_, i) => i !== index);
+    if (updatedItems[day].length === 0) {
+      delete updatedItems[day];
+    }
+    console.log('Updated items after deletion:', updatedItems); // Debug statement
     dispatch(deleteEvent({ date: day, index }));
-    saveEventsToStorage(newItems);
+    saveEventsToStorage(updatedItems);
+    setRefresh(!refresh); // Trigger re-render
   };
-  
 
-  const renderItem = (item, index) => (
+  const renderItem = (item, firstItemInDay, index) => (
     <TouchableOpacity key={index}>
       <Card style={styles.item}>
         <Card.Content>
@@ -81,15 +91,23 @@ export default function CalendarScreen() {
     </TouchableOpacity>
   );
 
+  const renderEmptyDate = () => (
+    <View style={styles.emptyDate}>
+      <Text style={styles.emptyMessage}>No events planned for this day</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <Agenda
         items={items}
         loadItemsForMonth={() => {}}
         selected={selectedDate}
-        renderItem={renderItem}
+        renderItem={(item, firstItemInDay) => renderItem(item, firstItemInDay, items[item.day].indexOf(item))}
+        renderEmptyDate={renderEmptyDate}
         showClosingKnob={true}
         onDayPress={(day) => setSelectedDate(day.dateString)}
+        key={refresh} // Add this line to re-render the component on refresh state change
       />
 
       <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
@@ -132,6 +150,8 @@ const styles = StyleSheet.create({
   emptyDate: {
     height: 15,
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: 30
   },
   customDay: {
@@ -151,5 +171,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
-  }
+  },
+  emptyMessage: {
+    fontSize: 18,
+    color: 'gray',
+  },
 });

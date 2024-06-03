@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { addEvent } from '../redux/eventsSlice';
 
-const AddEvent = ({ modalVisible, setModalVisible, selectedDate }) => {
+const AddEvent = ({ modalVisible, setModalVisible, addEvent, selectedDate }) => {
   const [eventTitle, setEventTitle] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [eventDate, setEventDate] = useState(selectedDate);
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setEventDate(selectedDate);
+  }, [selectedDate]);
 
   const handleAddEvent = () => {
     if (!eventTitle || !eventDescription || !eventDate) return;
-    dispatch(addEvent({ title: eventTitle, description: eventDescription, date: eventDate }));
+    addEvent(eventTitle, eventDescription, eventDate);
     setEventTitle('');
     setEventDescription('');
     setEventDate(selectedDate);

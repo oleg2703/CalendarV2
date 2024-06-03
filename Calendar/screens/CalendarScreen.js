@@ -5,11 +5,12 @@ import { Card } from 'react-native-paper';
 import Header from '../components/Header';
 import AddEvent from '../components/AddEvent';
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const timeToString = (time) => {
   const date = new Date(time);
   return date.toISOString().split('T')[0];
-}
+};
 
 export default function CalendarScreen() {
   const [items, setItems] = useState({});
@@ -17,8 +18,31 @@ export default function CalendarScreen() {
   const [selectedDate, setSelectedDate] = useState(timeToString(new Date()));
 
   useEffect(() => {
+    loadEvents();
     setSelectedDate(timeToString(new Date()));
   }, []);
+
+  const saveEventsToStorage = async (events) => {
+    try {
+      const jsonValue = JSON.stringify(events);
+      await AsyncStorage.setItem('@events', jsonValue);
+    } catch (e) {
+      console.error('Error saving events to storage:', e);
+    }
+  };
+
+  const loadEvents = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@events');
+      if (jsonValue != null) {
+        setItems(JSON.parse(jsonValue));
+      } else {
+        setItems({});
+      }
+    } catch (e) {
+      console.error('Error loading events from storage:', e);
+    }
+  };
 
   const loadItems = (day) => {
     setTimeout(() => {
@@ -47,12 +71,14 @@ export default function CalendarScreen() {
       day: date
     });
     setItems(newItems);
+    saveEventsToStorage(newItems);
   };
 
   const deleteEvent = (day, index) => {
     const newItems = { ...items };
     newItems[day].splice(index, 1);
     setItems(newItems);
+    saveEventsToStorage(newItems);
   };
 
   const renderItem = (item, index) => {
@@ -147,5 +173,3 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
-
-

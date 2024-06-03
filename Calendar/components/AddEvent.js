@@ -1,15 +1,36 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddEvent = ({ modalVisible, setModalVisible, addEvent, selectedDate }) => {
   const [eventTitle, setEventTitle] = useState('');
   const [eventDescription, setEventDescription] = useState('');
+  const [eventDate, setEventDate] = useState(selectedDate);
 
-  const handleAddEvent = () => {
-    if (!eventTitle || !eventDescription) return;
-    addEvent(eventTitle, eventDescription, selectedDate);
+  const saveEventToStorage = async (newEvent) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@events');
+      let events = jsonValue != null ? JSON.parse(jsonValue) : {};
+
+      if (!events[selectedDate]) {
+        events[selectedDate] = [];
+      }
+      events[selectedDate].push(newEvent);
+
+      await AsyncStorage.setItem('@events', JSON.stringify(events));
+    } catch (error) {
+      console.error('Error saving event to storage:', error);
+    }
+  };
+
+  const handleAddEvent = async () => {
+    if (!eventTitle || !eventDescription || !eventDate) return;
+    const newEvent = { name: eventTitle, description: eventDescription, day: eventDate };
+    await saveEventToStorage(newEvent);
+    addEvent(eventTitle, eventDescription, eventDate);
     setEventTitle('');
     setEventDescription('');
+    setEventDate(selectedDate);
     setModalVisible(false);
   };
 
@@ -22,28 +43,35 @@ const AddEvent = ({ modalVisible, setModalVisible, addEvent, selectedDate }) => 
         setModalVisible(!modalVisible);
       }}
     >
-      <View style={styles.modalView}>
-        <Text style={styles.modalText}>Add Event</Text>
-        <TextInput
-          placeholder="Event Title"
-          style={styles.input}
-          value={eventTitle}
-          onChangeText={setEventTitle}
-        />
-        <TextInput
-          placeholder="Event Description"
-          style={styles.input}
-          value={eventDescription}
-          onChangeText={setEventDescription}
-        />
-        <Text style={styles.dateText}>Date: {selectedDate}</Text>
-        <View style={styles.buttonRow}>
-          <TouchableOpacity style={[styles.modalButton, styles.addButton]} onPress={handleAddEvent}>
-            <Text style={styles.buttonText}>Add</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.modalButton, styles.cancelButton]} onPress={() => setModalVisible(false)}>
-            <Text style={styles.buttonText}>Cancel</Text>
-          </TouchableOpacity>
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>Додати Подію</Text>
+          <TextInput
+            placeholder="Назва події"
+            style={styles.input}
+            value={eventTitle}
+            onChangeText={setEventTitle}
+          />
+          <TextInput
+            placeholder="Опис події"
+            style={styles.input}
+            value={eventDescription}
+            onChangeText={setEventDescription}
+          />
+          <TextInput
+            placeholder="Введіть дату (YYYY-MM-DD)"
+            style={styles.input}
+            value={eventDate}
+            onChangeText={setEventDate}
+          />
+          <View style={styles.buttonRow}>
+            <TouchableOpacity style={[styles.modalButton, styles.addButton]} onPress={handleAddEvent}>
+              <Text style={styles.buttonText}>Додати</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.modalButton, styles.cancelButton]} onPress={() => setModalVisible(false)}>
+              <Text style={styles.buttonText}>Вихід</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -51,23 +79,26 @@ const AddEvent = ({ modalVisible, setModalVisible, addEvent, selectedDate }) => 
 };
 
 const styles = StyleSheet.create({
-  modalView: {
+  centeredView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
-    height:"60%",
+    marginTop: 22,
+  },
+  modalView: {
+    width: '80%',
     backgroundColor: 'white',
-    borderRadius: 30,
-    padding: 35,
+    borderRadius: 20,
+    padding: 20,
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   input: {
     width: '100%',
@@ -75,42 +106,36 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 20,
-    paddingHorizontal: 10
-  },
-  dateText: {
-    marginBottom: 20,
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: 'bold'
+    paddingHorizontal: 10,
   },
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%'
+    width: '100%',
   },
   modalButton: {
     flex: 1,
     padding: 10,
     margin: 5,
     borderRadius: 5,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   addButton: {
-    backgroundColor: 'blue'
+    backgroundColor: 'blue',
   },
   cancelButton: {
-    backgroundColor: 'red'
+    backgroundColor: 'red',
   },
   buttonText: {
     color: 'white',
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });
 
 export default AddEvent;

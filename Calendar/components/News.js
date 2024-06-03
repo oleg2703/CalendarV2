@@ -41,7 +41,7 @@ const News = () => {
   }, []);
 
   const renderItem = ({ item }) => (
-    <View style={[styles.newsItem, { width: contentWidth * 0.8 }]}>
+    <View style={[styles.newsItem, { width: contentWidth * 0.9 }]}>
       <Text style={styles.newsTitle} numberOfLines={7} ellipsizeMode="tail">{item.title}</Text>
       <Text style={styles.newsMeta} numberOfLines={1} ellipsizeMode="tail">{item.meta}</Text>
       <Text style={styles.newsExcerpt} numberOfLines={4} ellipsizeMode="tail">{item.excerpt}</Text>
@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   flatListContent: {
-  marginTop:"5%"
+  marginTop:"5%",
+  marginLeft:"3%",
   },
   newsItem: {
     marginBottom: 20,

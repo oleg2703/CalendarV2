@@ -16,7 +16,7 @@ const eventsSlice = createSlice({
       if (!state.items[date]) {
         state.items[date] = [];
       }
-      state.items[date].push({ name: title, description, height: 50, day: date });
+      state.items[date].push({ name: title, description, height: 50, day: date, reminder: null });
     },
     deleteEvent: (state, action) => {
       const { date, index } = action.payload;
@@ -27,8 +27,20 @@ const eventsSlice = createSlice({
         }
       }
     },
+    setReminder: (state, action) => {
+      const { date, index, reminder } = action.payload;
+      if (state.items[date]) {
+        state.items[date][index].reminder = reminder;
+      }
+    },
+    removeReminder: (state, action) => {
+      const { date, index } = action.payload;
+      if (state.items[date]) {
+        state.items[date][index].reminder = null;
+      }
+    },
   },
 });
 
-export const { setEvents, addEvent, deleteEvent } = eventsSlice.actions;
+export const { setEvents, addEvent, deleteEvent, setReminder, removeReminder } = eventsSlice.actions;
 export default eventsSlice.reducer;

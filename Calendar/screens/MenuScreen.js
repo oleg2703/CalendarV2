@@ -7,12 +7,12 @@ const MenuScreen = () => {
   return (
     <View style={styles.container}>
       <Image
-        style={{ width: 170, height: 120,marginTop:"10%"}}
+        style={{ width: 170, height: 120,marginTop:"14%"}}
         source={require("../assets/favicon.png")}
       />
-      <Text>Щоденник календар ФКНТ</Text>
-      
-      <News style={{marginBottom:"10%"}}/>
+      <Text style={{fontWeight:"600", fontSize:24}}>Щоденник календар ФКНТ</Text>
+      <Text style={{fontWeight:"400", fontSize:16}}></Text>
+      <News/>
       <Header style={styles.header} />
     </View>
   );

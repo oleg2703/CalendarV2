@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { Card } from 'react-native-paper';
 import Header from '../components/Header';
 import AddEvent from '../components/AddEvent';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEvents, addEvent, deleteEvent } from '../redux/eventsSlice';
+import { setEvents, addEvent, deleteEvent, setReminder, removeReminder } from '../redux/eventsSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const timeToString = (time) => {
   const date = new Date(time);
@@ -20,6 +21,8 @@ export default function CalendarScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(timeToString(new Date()));
   const [refresh, setRefresh] = useState(false);  // State to trigger re-render
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     loadEvents();
@@ -49,7 +52,7 @@ export default function CalendarScreen() {
   };
 
   const handleAddEvent = (title, description, date) => {
-    const newEvent = { name: title, description, height: 50, day: date };
+    const newEvent = { name: title, description, height: 50, day: date, reminder: null };
     dispatch(addEvent({ title, description, date }));
     const updatedItems = { ...items, [date]: [...(items[date] || []), newEvent] };
     saveEventsToStorage(updatedItems);
@@ -73,6 +76,31 @@ export default function CalendarScreen() {
     setRefresh(!refresh); // Trigger re-render
   };
 
+  const handleSetReminder = (event, date, index) => {
+    setSelectedEvent({ event, date, index });
+    setShowDatePicker(true);
+  };
+
+  const handleDateChange = (event, selectedDate) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      const reminder = selectedDate.toISOString();
+      dispatch(setReminder({ date: selectedEvent.date, index: selectedEvent.index, reminder }));
+      const updatedItems = { ...items };
+      updatedItems[selectedEvent.date][selectedEvent.index].reminder = reminder;
+      saveEventsToStorage(updatedItems);
+      setRefresh(!refresh); // Trigger re-render
+    }
+  };
+
+  const handleRemoveReminder = (date, index) => {
+    dispatch(removeReminder({ date, index }));
+    const updatedItems = { ...items };
+    updatedItems[date][index].reminder = null;
+    saveEventsToStorage(updatedItems);
+    setRefresh(!refresh); // Trigger re-render
+  };
+
   const renderItem = (item, firstItemInDay, index) => (
     <TouchableOpacity key={index}>
       <Card style={styles.item}>
@@ -82,9 +110,15 @@ export default function CalendarScreen() {
               <Text>{item.name}</Text>
               <Text>{item.description}</Text>
             </View>
-            <TouchableOpacity onPress={() => handleDeleteEvent(item.day, index)}>
-              <Ionicons name="trash" size={24} color="red" />
-            </TouchableOpacity>
+            <View style={styles.icons}>
+            <TouchableOpacity onPress={() => item.reminder ? handleRemoveReminder(item.day, index) : handleSetReminder(item, item.day, index)}>
+                <Ionicons name="notifications" size={24} color={item.reminder ? "green" : "gray"} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleDeleteEvent(item.day, index)}>
+                <Ionicons name="trash" size={24} color="red" />
+              </TouchableOpacity>
+              
+            </View>
           </View>
         </Card.Content>
       </Card>
@@ -122,6 +156,15 @@ export default function CalendarScreen() {
       />
 
       <Header style={styles.header} />
+
+      {showDatePicker && (
+        <DateTimePicker
+          value={new Date()}
+          mode="time"
+          display="default"
+          onChange={handleDateChange}
+        />
+      )}
     </View>
   );
 }
@@ -171,6 +214,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  icons: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   emptyMessage: {
     fontSize: 18,

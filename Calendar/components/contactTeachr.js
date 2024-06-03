@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView, StyleSheet } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Image } from 'react-native';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import * as FileSystem from 'expo-file-system';
@@ -45,7 +45,9 @@ const Teachers = () => {
               const position = positionMatch ? positionMatch[1].trim() : '';
               const degree = degreeMatch ? degreeMatch[1].trim() : '';
 
-              currentTeacher = { name, position, degree, email: '' };
+              const imageUrl = $(element).prev('a').find('img').attr('src'); // Assuming the image is in the previous <a> tag
+
+              currentTeacher = { name, position, degree, email: '', imageUrl };
             } else if ($(element).is('p') && $(element).text().includes('@')) {
               if (currentTeacher) {
                 currentTeacher.email = $(element).text().trim();
@@ -77,6 +79,13 @@ const Teachers = () => {
 
   const renderTeacherItem = (item) => (
     <View style={styles.teacherItem} key={item.name}>
+      {item.imageUrl && (
+        <Image
+          source={{ uri: item.imageUrl }}
+          style={styles.teacherImage}
+          resizeMode="contain"
+        />
+      )}
       <Text style={styles.teacherName}>{item.name}</Text>
       <Text style={styles.teacherPosition}>{item.position}</Text>
       {item.degree && <Text style={styles.teacherDegree}>{item.degree}</Text>}
@@ -103,7 +112,7 @@ const Teachers = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:"5%",
+    marginTop: "5%",
     backgroundColor: '#fff',
     paddingBottom: 60, // space for the header
   },
@@ -116,6 +125,12 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 20,
     alignItems: 'center',
+  },
+  teacherImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
   },
   teacherName: {
     color: '#2c3e50',

@@ -20,7 +20,7 @@ const HomeScreen = ({navigation}) => {
         Привіт!
       </Text>
       <TouchableOpacity
-      onPress={()=>navigation.navigate("Upload")}
+      onPress={()=>navigation.navigate("menu")}
         style={{
           backgroundColor: "#6F9B9B",
           minwidth: "200",

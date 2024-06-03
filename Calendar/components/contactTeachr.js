@@ -3,6 +3,7 @@ import { Text, View, ScrollView, StyleSheet } from 'react-native';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import * as FileSystem from 'expo-file-system';
+import Header from '../components/Header';
 
 const Teachers = () => {
   const [teachers, setTeachers] = useState([]);
@@ -26,7 +27,7 @@ const Teachers = () => {
             }
 
             const name = $(element).find('strong').text().trim();
-            let textNodes = $(element).contents().filter(function() {
+            let textNodes = $(element).contents().filter(function () {
               return this.nodeType === 3; // 3 is the nodeType for text nodes
             });
 
@@ -70,30 +71,36 @@ const Teachers = () => {
     <View style={styles.teacherItem} key={item.name}>
       <Text style={styles.teacherName}>{item.name}</Text>
       <Text style={styles.teacherPosition}>{item.position}</Text>
-      {item.degree && <Text  style={styles.teacherDegree}>{item.degree}</Text>}
-      {item.email && <Text  selectable={true} style={styles.teacherEmail}>{item.email}</Text>}
+      {item.degree && <Text style={styles.teacherDegree}>{item.degree}</Text>}
+      {item.email && <Text selectable={true} style={styles.teacherEmail}>{item.email}</Text>}
     </View>
   );
 
   return (
-    <ScrollView style={styles.container}>
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : teachers.length > 0 ? (
-        teachers.map(renderTeacherItem)
-      ) : (
-        <Text>No data available.</Text>
-      )}
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        {loading ? (
+          <Text>Loading...</Text>
+        ) : teachers.length > 0 ? (
+          teachers.map(renderTeacherItem)
+        ) : (
+          <Text>No data available.</Text>
+        )}
+      </ScrollView>
+      <Header style={styles.header} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop:"5%",
     backgroundColor: '#fff',
-    marginTop:30,
-    padding: 10,
+    paddingBottom: 60, // space for the header
+  },
+  scrollView: {
+    flex: 1,
   },
   teacherItem: {
     backgroundColor: '#f8f8f8',
@@ -119,13 +126,18 @@ const styles = StyleSheet.create({
     color: '#34495e',
     fontSize: 14,
     marginBottom: 5,
-    textAlign: 'start',
+    textAlign: 'center',
   },
   teacherEmail: {
     color: 'blue',
     fontSize: 14,
-    fontWeight:"700",
+    fontWeight: '700',
     textAlign: 'center',
+  },
+  header: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 });
 

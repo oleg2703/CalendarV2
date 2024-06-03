@@ -3,6 +3,7 @@ import { Text, View, ScrollView, useWindowDimensions, StyleSheet } from 'react-n
 import RenderHtml from 'react-native-render-html';
 import axios from 'axios';
 import cheerio from 'cheerio';
+import Header  from '../components/Header'
 
 const News = () => {
   const [newsItems, setNewsItems] = useState([]);
@@ -43,6 +44,7 @@ const News = () => {
           </View>
         ))}
       </ScrollView>
+      <Header/>
     </View>
   );
 };
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 10,
+    
   },
   newsItem: {
     marginBottom: 20,

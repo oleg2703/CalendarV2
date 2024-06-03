@@ -95,34 +95,48 @@ const ScheduleApp = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1,  backgroundColor:"#E1F7F9" }}>
-      <Header headerText={"Щоденник-Календар ФКНТ"} headerIcon={"bell-o"} />
     <View style={styles.container}>
-      <Text style={styles.titleUp}>Виберіть курс:</Text>
-      <View style={styles.buttonContainer}>
-        {renderCourseButtons()}
-      </View>
-
-    
-        <>
-          <Text style={styles.titleUp}>Виберіть групу:</Text>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>Виберіть курс:</Text>
           <View style={styles.buttonContainer}>
-            {renderSpecialtyButtons()}
+            {renderCourseButtons()}
           </View>
-        </>
-      
-      </View>
-    </SafeAreaView>
-    
+          {selectedCourse ? (
+            <>
+              <Text style={styles.title}>Виберіть групу:</Text>
+              <View style={styles.buttonContainer}>
+                {renderSpecialtyButtons()}
+              </View>
+            </>
+          ) : null}
+        </View>
+      </SafeAreaView>
+      <Header style={styles.header} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#E1F7F9",
+  },
+  safeArea: {
+    flex: 1,
+    marginTop: "5%",
+    paddingBottom: 60, // space for the header
+  },
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
   buttonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'safe center',
-    marginVertical: 14,
+    justifyContent: 'center',
+    marginVertical: 20,
   },
   button: {
     backgroundColor: '#007BFF',
@@ -134,15 +148,17 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 16,
   },
-  titleUp:{
-    fontSize:23,
+  title: {
+    fontSize: 23,
+    textAlign: 'center',
+    marginBottom: 10,
   },
-  container:{
-    flex:1,
-    justifyContent:"space-between",
-    paddingVertical:"5%",
-
-  }
+  header: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    zIndex: 10, // Ensure header is above other content
+  },
 });
 
 export default ScheduleApp;

@@ -10,6 +10,7 @@ import NotificationScreen from "../screens/NotificationScreen";
 import CalendarScreen from "../screens/CalendarScreen";
 import News from '../components/News'
 import contactTeachr from '../components/contactTeachr'
+import StudentScreen from "../screens/StudetScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ const AppNavigator=()=> {
           <Stack.Screen name="News" component={News} />
           <Stack.Screen name="teacher" component={contactTeachr} />
           <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
+          <Stack.Screen name="StudentScreen" component={StudentScreen} />
         </Stack.Navigator>
     </NavigationContainer>
     </GestureHandlerRootView>

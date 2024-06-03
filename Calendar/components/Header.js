@@ -24,7 +24,7 @@ export default function Header({ headerText, headerIcon }) {
         name={headerIcon}
         size={24}
         color="#000"
-        onPress={() => navigation.navigate('Notification')}
+        onPress={() => navigation.navigate('StudentScreen')}
       />
       <FontAwesome
         name="bars"

@@ -1,0 +1,213 @@
+{
+    "name": "132",
+    "schedule": {
+        "week1": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Physics",
+                        "type": "Лекцiя",
+                        "room": "1.440",
+                        "teacher": "Мєняйлов С.М."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Physics",
+                        "type": "Лабораторна",
+                        "room": "1.440",
+                        "teacher": "Мєняйлов С.М."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Physics",
+                        "type": "Лабораторна",
+                        "room": "1.440",
+                        "teacher": "Мєняйлов С.М."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Higher Mathematics",
+                        "type": "Лекцiя",
+                        "room": "3.303",
+                        "teacher": "Карупу О.В."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Higher Mathematics",
+                        "type": "Практичне",
+                        "room": "3.303",
+                        "teacher": "Карупу О.В."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [
+                    {
+                        "number": 2,
+                        "subject": "Programming",
+                        "type": "Лабораторна",
+                        "room": "5.117",
+                        "teacher": "Фоміна Н.Б."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Professional Foreign Language",
+                        "type": "Практичне",
+                        "room": "6.211",
+                        "teacher": "Дишлева Г.В."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Physical Training and Self-improvement",
+                        "type": "Практичне",
+                        "room": "Спорт.к.",
+                        "teacher": "Бобр В.І."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Business Ukrainian Language",
+                        "type": "Практичне",
+                        "room": "6.211",
+                        "teacher": "Сібрук А.В."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Friday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Computer Logic",
+                        "type": "Лекцiя",
+                        "room": "5.204",
+                        "teacher": "Телешко І.В."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Computer Logic",
+                        "type": "Лабораторна",
+                        "room": "5.204",
+                        "teacher": "Телешко І.В."
+                    }
+                ],
+                "subgroup2": []
+            }
+        },
+        "week2": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Physics",
+                        "type": "Лекцiя",
+                        "room": "1.422",
+                        "teacher": "Мєняйлов С.М."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Physics",
+                        "type": "Практичне",
+                        "room": "1.422",
+                        "teacher": "Мєняйлов С.М."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Higher Mathematics",
+                        "type": "Лекцiя",
+                        "room": "3.303",
+                        "teacher": "Карупу О.В."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Higher Mathematics",
+                        "type": "Практичне",
+                        "room": "3.303",
+                        "teacher": "Карупу О.В."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Programming",
+                        "type": "Лекцiя",
+                        "room": "5.117",
+                        "teacher": "Фоміна Н.Б."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Programming",
+                        "type": "Лабораторна",
+                        "room": "5.117",
+                        "teacher": "Фоміна Н.Б."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Professional Foreign Language",
+                        "type": "Практичне",
+                        "room": "6.209",
+                        "teacher": "Дишлева Г.В."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Physical Training and Self-improvement",
+                        "type": "Практичне",
+                        "room": "Спорт.к.",
+                        "teacher": "Бобр В.І."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Business Ukrainian Language",
+                        "type": "Лекцiя",
+                        "room": "6.209",
+                        "teacher": "Сібрук А.В."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Friday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Computer Logic",
+                        "type": "Лекцiя",
+                        "room": "5.204",
+                        "teacher": "Телешко І.В."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Computer Logic",
+                        "type": "Лабораторна",
+                        "room": "5.204",
+                        "teacher": "Телешко І.В."
+                    }
+                ],
+                "subgroup2": []
+            }
+        }
+    }
+}

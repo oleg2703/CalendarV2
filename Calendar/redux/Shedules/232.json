@@ -1,0 +1,211 @@
+{
+  "groups": [
+    {
+      "name": "232",
+      "schedule": {
+        "week1": {
+          "Monday": {
+            "subgroup1": [
+              {
+                "number": 2,
+                "subject": "Computer Microelectronics",
+                "type": "Лекцiя",
+                "room": "5.115",
+                "teacher": "Кудренко С.О."
+              },
+              {
+                "number": 3,
+                "subject": "Computer Microelectronics",
+                "type": "Лабораторна",
+                "room": "5.115",
+                "teacher": "Кудренко С.О."
+              }
+            ],
+            "subgroup2": []
+          },
+          "Tuesday": {
+            "subgroup1": [
+              {
+                "number": 1,
+                "subject": "Philosophy",
+                "type": "Лекцiя",
+                "room": "3.328",
+                "teacher": "Пода Т.А."
+              },
+              {
+                "number": 2,
+                "subject": "Philosophy",
+                "type": "Практичне",
+                "room": "3.328",
+                "teacher": "Пода Т.А."
+              }
+            ],
+            "subgroup2": []
+          },
+          "Wednesday": {
+            "subgroup1": [
+              {
+                "number": 3,
+                "subject": "Object-Oriented Programming",
+                "type": "Лекцiя",
+                "room": "5.207",
+                "teacher": "Сураєв В.Ф."
+              },
+              {
+                "number": 4,
+                "subject": "Object-Oriented Programming",
+                "type": "Лабораторна",
+                "room": "5.207",
+                "teacher": "Сураєв В.Ф."
+              },
+              {
+                "number": 5,
+                "subject": "English for Specific Purpose",
+                "type": "Практичне",
+                "room": "3.328",
+                "teacher": "Шульга Т.В."
+              }
+            ],
+            "subgroup2": []
+          },
+          "Thursday": {
+            "subgroup1": [
+              {
+                "number": 2,
+                "subject": "Computer Circuit Engineering",
+                "type": "Лекцiя",
+                "room": "5.117",
+                "teacher": "Фоміна Н.Б."
+              },
+              {
+                "number": 3,
+                "subject": "Computer Circuit Engineering",
+                "type": "Лабораторна",
+                "room": "5.117",
+                "teacher": "Фоміна Н.Б."
+              }
+            ],
+            "subgroup2": []
+          },
+          "Friday": {
+            "subgroup1": [
+              {
+                "number": 3,
+                "subject": "System Software",
+                "type": "Лекцiя",
+                "room": "5.115",
+                "teacher": "Телешко І.В."
+              },
+              {
+                "number": 4,
+                "subject": "System Programming",
+                "type": "Лабораторна",
+                "room": "5.115",
+                "teacher": "Телешко І.В."
+              }
+            ],
+            "subgroup2": []
+          }
+        },
+        "week2": {
+          "Monday": {
+            "subgroup1": [
+              {
+                "number": 1,
+                "subject": "System Software",
+                "type": "Лекцiя",
+                "room": "5.113",
+                "teacher": "Телешко І.В."
+              },
+              {
+                "number": 2,
+                "subject": "System Software",
+                "type": "Лабораторна",
+                "room": "5.113",
+                "teacher": "Телешко І.В."
+              }
+            ],
+            "subgroup2": []
+          },
+          "Tuesday": {
+            "subgroup1": [
+              {
+                "number": 2,
+                "subject": "Philosophy",
+                "type": "Практичне",
+                "room": "3.328",
+                "teacher": "Пода Т.А."
+              },
+              {
+                "number": 3,
+                "subject": "English for Specific Purpose",
+                "type": "Практичне",
+                "room": "3.328",
+                "teacher": "Шульга Т.В."
+              }
+            ],
+            "subgroup2": []
+          },
+          "Wednesday": {
+            "subgroup1": [
+              {
+                "number": 1,
+                "subject": "Object-Oriented Programming",
+                "type": "Лекцiя",
+                "room": "5.113",
+                "teacher": "Сураєв В.Ф."
+              },
+              {
+                "number": 2,
+                "subject": "Computer Microelectronics",
+                "type": "Лекцiя",
+                "room": "5.113",
+                "teacher": "Кудренко С.О."
+              }
+            ],
+            "subgroup2": []
+          },
+          "Thursday": {
+            "subgroup1": [
+              {
+                "number": 2,
+                "subject": "Computer Circuit Engineering",
+                "type": "Лабораторна",
+                "room": "5.117",
+                "teacher": "Фоміна Н.Б."
+              },
+              {
+                "number": 3,
+                "subject": "English for Specific Purpose",
+                "type": "Практичне",
+                "room": "3.328",
+                "teacher": "Шульга Т.В."
+              }
+            ],
+            "subgroup2": []
+          },
+          "Friday": {
+            "subgroup1": [
+              {
+                "number": 3,
+                "subject": "System Programming",
+                "type": "Лекцiя",
+                "room": "5.115",
+                "teacher": "Телешко І.В."
+              },
+              {
+                "number": 4,
+                "subject": "System Programming",
+                "type": "Лабораторна",
+                "room": "5.115",
+                "teacher": "Телешко І.В."
+              }
+            ],
+            "subgroup2": []
+          }
+          
+        }
+      }
+    }
+  ]
+}

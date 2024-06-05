@@ -1,0 +1,276 @@
+{
+    "name": "432",
+    "schedule": {
+        "week1": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Databases Organization",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Databases Organization",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Design of Computer Systems and their Components",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Design of Computer Systems and their Components",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Modelling of Computer Systems",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Modelling of Computer Systems",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Databases Organization",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Administration of Computer Networks",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Administration of Computer Networks",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Friday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Peripheral Devices",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Фоміна Н.Б."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Peripheral Devices",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Фоміна Н.Б."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Peripheral Devices",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Фоміна Н.Б."
+                    }
+                ],
+                "subgroup2": []
+            }
+        },
+        "week2": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Databases Organization",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Databases Organization",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Modelling of Computer Systems",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Modelling of Computer Systems",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Design of Computer Systems and their Components",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Design of Computer Systems and their Components",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 2,
+                        "subject": "Administration of Computer Networks",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Administration of Computer Networks",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Friday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Peripheral Devices",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Фоміна Н.Б."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Peripheral Devices",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Фоміна Н.Б."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Modelling of Computer Systems",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    }
+                ],
+                "subgroup2": []
+            }
+        }
+    }
+}

@@ -1,0 +1,309 @@
+{
+    "name": "413",
+    "schedule": {
+        "week1": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Якість програмного забезпечення",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Харченко О.Г."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Економіка та бізнес",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Назаренко О.П."
+                    }
+                ],
+                "subgroup2": [
+                    {
+                        "number": 5,
+                        "subject": "Якість програмного забезпечення",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Харченко О.Г."
+                    }
+                ]
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Військова підготовка",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Військова підготовка",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Військова підготовка",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Військова підготовка",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [
+                    {
+                        "number": 4,
+                        "subject": "Якість програмного забезпечення",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Харченко О.Г."
+                    },
+                    {
+                        "number": 5,
+                        "subject": "Економіка та бізнес",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": "Назаренко О.П."
+                    },
+                    {
+                        "number": 6,
+                        "subject": "Якість програмного забезпечення",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Харченко О.Г."
+                    }
+                ],
+                "subgroup2": [
+                    {
+                        "number": 6,
+                        "subject": "Охорона праці",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Якимець І.В."
+                    }
+                ]
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "WEB-технології та WEB-дизайн",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Клімова А.С."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Охорона праці",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Козлітін О.О."
+                    },
+                    {
+                        "number": 5,
+                        "subject": "Охорона праці",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Якимець І.В."
+                    },
+                    {
+                        "number": 6,
+                        "subject": "WEB-технології та WEB-дизайн",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Клімова А.С."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Friday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Охорона праці",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Козлітін О.О."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "WEB-технології та WEB-дизайн",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Клімова А.С."
+                    }
+                ],
+                "subgroup2": [
+                    {
+                        "number": 5,
+                        "subject": "WEB-технології та WEB-дизайн",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Клімова А.С."
+                    }
+                ]
+            }
+        },
+        "week2": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Якість програмного забезпечення",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Харченко О.Г."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Економіка та бізнес",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Назаренко О.П."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Військова підготовка",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Військова підготовка",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Військова підготовка",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Військова підготовка",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Охорона праці",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Якимець І.В."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Економіка та бізнес",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": "Назаренко О.П."
+                    },
+                    {
+                        "number": 5,
+                        "subject": "Якість програмного забезпечення",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Харченко О.Г."
+                    }
+                ],
+                "subgroup2": [
+                    {
+                        "number": 3,
+                        "subject": "Якість програмного забезпечення",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Харченко О.Г."
+                    },
+                      {
+                        "number": 3,
+                        "subject": "Охорона праці",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Якимець І.В."
+                    }
+                ]
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 2,
+                        "subject": "WEB-технології та WEB-дизайн",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Клімова А.С."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "WEB-технології та WEB-дизайн",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Клімова А.С."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Охорона праці",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Козлітін О.О."
+                    }
+                ],
+                "subgroup2": [
+                    {
+                        "number": 5,
+                        "subject": "WEB-технології та WEB-дизайн",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Клімова А.С."
+                    }
+                ]
+            },
+            "Friday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Економіка та бізнес",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Назаренко О.П."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Економіка та бізнес",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": "Назаренко О.П."
+                    }
+                ],
+                "subgroup2": []
+            }
+        }
+    }
+}

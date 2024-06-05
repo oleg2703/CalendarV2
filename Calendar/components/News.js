@@ -3,7 +3,7 @@ import { Text, View, FlatList, useWindowDimensions, StyleSheet, Image } from 're
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import cheerio from 'cheerio';
-import Header from '../components/Header';
+
 
 const News = () => {
   const [newsItems, setNewsItems] = useState([]);
@@ -58,7 +58,7 @@ const News = () => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.flatListContent}
       />
-      <Header />
+     
     </View>
   );
 };

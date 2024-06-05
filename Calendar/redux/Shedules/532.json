@@ -1,0 +1,169 @@
+{
+    "name": "532",
+    "schedule": {
+        "week1": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Programming Technologies of Computer Systems and Networks",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Programming Technologies of Computer Systems and Networks",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 4,
+                        "subject": "Research Methods of Computer Systems, Networks and Infrastructure",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    },
+                    {
+                        "number": 5,
+                        "subject": "Research Methods of Computer Systems, Networks and Infrastructure",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [],
+                "subgroup2": []
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Data Mining and Deep Machine Learning",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Data Mining and Deep Machine Learning",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    },
+                    {
+                        "number": 5,
+                        "subject": "Philosophical Problems of Scientific Cognition",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": "Абисова М.А."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Friday": {
+                "subgroup1": [],
+                "subgroup2": []
+            },
+            "Saturday": {
+                "subgroup1": [],
+                "subgroup2": []
+            }
+        },
+        "week2": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "ICS of Critical Infrastructure Design",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "ICS of Critical Infrastructure Design",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 4,
+                        "subject": "Research Methods of Computer Systems, Networks and Infrastructure",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    },
+                    {
+                        "number": 5,
+                        "subject": "Research Methods of Computer Systems, Networks and Infrastructure",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [],
+                "subgroup2": []
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 4,
+                        "subject": "Programming Technologies of Computer Systems and Networks",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Сураєв В.Ф."
+                    },
+                    {
+                        "number": 5,
+                        "subject": "Philosophical Problems of Scientific Cognition",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": "Абисова М.А."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Friday": {
+                "subgroup1": [
+                    {
+                        "number": 4,
+                        "subject": "Project Analysis of Computer Networks, Systems and Infrastructure",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    },
+                    {
+                        "number": 5,
+                        "subject": "Project Analysis of Computer Networks, Systems and Infrastructure",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Кудренко С.О."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Saturday": {
+                "subgroup1": [],
+                "subgroup2": []
+            }
+        }
+    }
+}

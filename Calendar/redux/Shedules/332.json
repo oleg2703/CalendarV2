@@ -1,0 +1,262 @@
+{
+    "name": "332",
+    "schedule": {
+        "week1": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Computer Systems",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Русанова О.В."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Computer Systems",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Русанова О.В."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Computer Architecture",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Information Security of Computer Systems and Networks",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Фоміна Н.Б."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [
+                    {
+                        "number": 3,
+                        "subject": "Specialized Computer Architectures",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Specialized Computer Architectures",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Computer Networks",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Пащенко Н.В."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Computer Networks",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Проценко М.М."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Friday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Specialized Computer Systems and Components",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Гільгурт С.Я."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Specialized Computer Systems and Components",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Гільгурт С.Я."
+                    }
+                ],
+                "subgroup2": []
+            }
+        },
+        "week2": {
+            "Monday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Military Training",
+                        "type": "Практичне",
+                        "room": "",
+                        "teacher": ""
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Tuesday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Computer Systems",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Русанова О.В."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Computer Systems",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Русанова О.В."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Specialized Computer Architectures",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Wednesday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Computer Architecture",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Computer Architecture",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Насер Халаса"
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Thursday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Specialized Computer Systems and Components",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Гільгурт С.Я."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Computer Networks",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Проценко М.М."
+                    }
+                ],
+                "subgroup2": []
+            },
+            "Friday": {
+                "subgroup1": [
+                    {
+                        "number": 1,
+                        "subject": "Specialized Computer Systems and Components",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Гільгурт С.Я."
+                    },
+                    {
+                        "number": 2,
+                        "subject": "Specialized Computer Systems and Components",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Гільгурт С.Я."
+                    },
+                    {
+                        "number": 3,
+                        "subject": "Information Security of Computer Systems and Networks",
+                        "type": "Лекцiя",
+                        "room": "",
+                        "teacher": "Фоміна Н.Б."
+                    },
+                    {
+                        "number": 4,
+                        "subject": "Information Security of Computer Systems and Networks",
+                        "type": "Лабораторна",
+                        "room": "",
+                        "teacher": "Фоміна Н.Б."
+                    }
+                ],
+                "subgroup2": []
+            }
+        }
+    }
+}

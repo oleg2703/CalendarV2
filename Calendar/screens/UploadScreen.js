@@ -33,7 +33,7 @@ const courses = {
     '332': 'https://docs.google.com/spreadsheets/d/16chpi_-you6c6t_PallQs7JvPxNNnp6s/edit?usp=sharing&ouid=110982410831226660809&rtpof=true&sd=true',
     '335,336,337,338': 'https://docs.google.com/spreadsheets/d/1chLLGGqMokyhQEecvDiLyFjn011Xeb1N/edit?usp=sharing&ouid=110982410831226660809&rtpof=true&sd=true',
     '351': 'https://docs.google.com/spreadsheets/d/12sejtUDvdQmVXXwFBUW26Dw84yLbugUC/edit?usp=sharing&ouid=110982410831226660809&rtpof=true&sd=true',
-    '361,361': 'https://docs.google.com/spreadsheets/d/19uVuc4AZmebOfrswticuObG7MtaYgBq4/edit?usp=sharing&ouid=110982410831226660809&rtpof=true&sd=true',
+    '361,362': 'https://docs.google.com/spreadsheets/d/19uVuc4AZmebOfrswticuObG7MtaYgBq4/edit?usp=sharing&ouid=110982410831226660809&rtpof=true&sd=true',
   },
   '4 курс': {
     '411,413,414': 'https://docs.google.com/spreadsheets/d/1vdXKbO6Gv25d5oW3xTCS3pSCaRTJnmwq/edit?usp=sharing&rtpof=true&sd=true',

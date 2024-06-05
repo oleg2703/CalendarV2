@@ -170,9 +170,9 @@ const ScheduleApp = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
+    marginTop: "10%",
     flex: 1,
     backgroundColor: "#E1F7F9",
   },

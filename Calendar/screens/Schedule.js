@@ -10,7 +10,7 @@ const renderSchedule = (schedule) => {
   const weeks = Object.keys(schedule);
   return weeks.map((week) => (
     <View key={week}>
-      <Text style={styles.weekTitle}>{week}</Text>
+      <Text style={styles.weekTitle}>Тиждень 1</Text>
       {Object.keys(schedule[week]).map((day) => (
         <View key={day} style={styles.dayContainer}>
           <Text style={styles.dayTitle}>{day}</Text>

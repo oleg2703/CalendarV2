@@ -15,7 +15,8 @@ const timeToString = (time) => {
   return date.toISOString().split('T')[0];
 };
 
-export default function CalendarScreen() {
+const CalendarScreen = ({ route }) => {
+  const { course, group, subgroup, week } = route.params;
   const items = useSelector((state) => state.events.items);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
@@ -28,6 +29,10 @@ export default function CalendarScreen() {
     loadEvents();
     setSelectedDate(timeToString(new Date()));
   }, []);
+
+  useEffect(() => {
+    generateEvents();
+  }, [course, group, subgroup, week]);
 
   const saveEventsToStorage = async (events) => {
     try {
@@ -111,13 +116,12 @@ export default function CalendarScreen() {
               <Text>{item.description}</Text>
             </View>
             <View style={styles.icons}>
-            <TouchableOpacity onPress={() => item.reminder ? handleRemoveReminder(item.day, index) : handleSetReminder(item, item.day, index)}>
+              <TouchableOpacity onPress={() => item.reminder ? handleRemoveReminder(item.day, index) : handleSetReminder(item, item.day, index)}>
                 <Ionicons name="notifications" size={24} color={item.reminder ? "green" : "gray"} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleDeleteEvent(item.day, index)}>
                 <Ionicons name="trash" size={24} color="red" />
               </TouchableOpacity>
-              
             </View>
           </View>
         </Card.Content>
@@ -130,6 +134,41 @@ export default function CalendarScreen() {
       <Text style={styles.emptyMessage}>No events planned for this day</Text>
     </View>
   );
+
+  const generateEvents = () => {
+    const newItems = {};
+    // Logic to generate events based on selected group, subgroup, and week
+    // For example, if it's week 1 and group 110, create events for the first week schedule
+    // Each event should include a title, description, date, and reminder time
+    // Add the generated events to newItems
+    const startTime = ["08:00", "09:50", "11:40", "13:30", "15:20", "17:10", "19:00"];
+    const endTime = ["09:35", "11:25", "13:15", "15:05", "16:55", "18:45", "20:35"];
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    
+    days.forEach(day => {
+      startTime.forEach((start, index) => {
+        const eventDate = new Date();
+        eventDate.setDate(eventDate.getDate() + (index % 7)); // Increment date for demo purposes
+        const dateStr = eventDate.toISOString().split('T')[0];
+        const event = {
+          name: `Class ${index + 1}`,
+          description: `${day} class`,
+          start: start,
+          end: endTime[index],
+          day: dateStr,
+          reminder: null
+        };
+        if (!newItems[dateStr]) {
+          newItems[dateStr] = [];
+        }
+        newItems[dateStr].push(event);
+      });
+    });
+
+    saveEventsToStorage(newItems);
+    dispatch(setEvents(newItems));
+    setRefresh(!refresh);
+  };
 
   return (
     <View style={styles.container}>
@@ -224,3 +263,5 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
 });
+
+export default CalendarScreen;

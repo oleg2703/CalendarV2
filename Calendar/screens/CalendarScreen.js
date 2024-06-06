@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { Card } from 'react-native-paper';
 import Header from '../components/Header';
 import AddEvent from '../components/AddEvent';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEvents, addEvent, deleteEvent, setReminder, removeReminder } from '../redux/eventsSlice';
+import { addEvent, deleteEvent, setReminder, removeReminder } from '../redux/eventsSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -16,12 +16,11 @@ const timeToString = (time) => {
 };
 
 const CalendarScreen = ({ route }) => {
-  const { course, group, subgroup, week } = route.params;
   const items = useSelector((state) => state.events.items);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(timeToString(new Date()));
-  const [refresh, setRefresh] = useState(false);  // State to trigger re-render
+  const [refresh, setRefresh] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -29,10 +28,6 @@ const CalendarScreen = ({ route }) => {
     loadEvents();
     setSelectedDate(timeToString(new Date()));
   }, []);
-
-  useEffect(() => {
-    generateEvents();
-  }, [course, group, subgroup, week]);
 
   const saveEventsToStorage = async (events) => {
     try {
@@ -61,24 +56,18 @@ const CalendarScreen = ({ route }) => {
     dispatch(addEvent({ title, description, date }));
     const updatedItems = { ...items, [date]: [...(items[date] || []), newEvent] };
     saveEventsToStorage(updatedItems);
-    setRefresh(!refresh); // Trigger re-render
+    setRefresh(!refresh);
   };
 
   const handleDeleteEvent = (day, index) => {
-    console.log('Deleting event:', day, index); // Debug statement
-    if (typeof index !== 'number') {
-      console.error('Index is not a number:', index);
-      return;
-    }
     const updatedItems = { ...items };
     updatedItems[day] = updatedItems[day].filter((_, i) => i !== index);
     if (updatedItems[day].length === 0) {
       delete updatedItems[day];
     }
-    console.log('Updated items after deletion:', updatedItems); // Debug statement
     dispatch(deleteEvent({ date: day, index }));
     saveEventsToStorage(updatedItems);
-    setRefresh(!refresh); // Trigger re-render
+    setRefresh(!refresh);
   };
 
   const handleSetReminder = (event, date, index) => {
@@ -94,7 +83,7 @@ const CalendarScreen = ({ route }) => {
       const updatedItems = { ...items };
       updatedItems[selectedEvent.date][selectedEvent.index].reminder = reminder;
       saveEventsToStorage(updatedItems);
-      setRefresh(!refresh); // Trigger re-render
+      setRefresh(!refresh);
     }
   };
 
@@ -103,7 +92,7 @@ const CalendarScreen = ({ route }) => {
     const updatedItems = { ...items };
     updatedItems[date][index].reminder = null;
     saveEventsToStorage(updatedItems);
-    setRefresh(!refresh); // Trigger re-render
+    setRefresh(!refresh);
   };
 
   const renderItem = (item, firstItemInDay, index) => (
@@ -135,41 +124,6 @@ const CalendarScreen = ({ route }) => {
     </View>
   );
 
-  const generateEvents = () => {
-    const newItems = {};
-    // Logic to generate events based on selected group, subgroup, and week
-    // For example, if it's week 1 and group 110, create events for the first week schedule
-    // Each event should include a title, description, date, and reminder time
-    // Add the generated events to newItems
-    const startTime = ["08:00", "09:50", "11:40", "13:30", "15:20", "17:10", "19:00"];
-    const endTime = ["09:35", "11:25", "13:15", "15:05", "16:55", "18:45", "20:35"];
-    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-    
-    days.forEach(day => {
-      startTime.forEach((start, index) => {
-        const eventDate = new Date();
-        eventDate.setDate(eventDate.getDate() + (index % 7)); // Increment date for demo purposes
-        const dateStr = eventDate.toISOString().split('T')[0];
-        const event = {
-          name: `Class ${index + 1}`,
-          description: `${day} class`,
-          start: start,
-          end: endTime[index],
-          day: dateStr,
-          reminder: null
-        };
-        if (!newItems[dateStr]) {
-          newItems[dateStr] = [];
-        }
-        newItems[dateStr].push(event);
-      });
-    });
-
-    saveEventsToStorage(newItems);
-    dispatch(setEvents(newItems));
-    setRefresh(!refresh);
-  };
-
   return (
     <View style={styles.container}>
       <Agenda
@@ -180,7 +134,7 @@ const CalendarScreen = ({ route }) => {
         renderEmptyDate={renderEmptyDate}
         showClosingKnob={true}
         onDayPress={(day) => setSelectedDate(day.dateString)}
-        key={refresh} // Add this line to re-render the component on refresh state change
+        key={refresh}
       />
 
       <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
@@ -213,13 +167,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     marginTop: "10%",
-    paddingBottom: 60, // Space for the header
+    paddingBottom: 60,
   },
   header: {
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    zIndex: 10, // Ensure header is above other content
+    zIndex: 10,
   },
   item: {
     backgroundColor: 'white',
@@ -247,7 +201,7 @@ const styles = StyleSheet.create({
   addButton: {
     position: 'absolute',
     right: 20,
-    bottom: 80, // Adjusted to be above the header
+    bottom: 80,
   },
   itemContent: {
     flexDirection: 'row',

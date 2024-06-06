@@ -1,8 +1,83 @@
-import { View, Text, StyleSheet, ScrollView, Image, Modal, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, Modal, TouchableOpacity, FlatList, TextInput } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { setCourse, setGroup, setSubgroup, setWeek, resetSelection } from '../redux/scheduleSclice';
+import { setEvents } from '../redux/eventsSlice';
 import Header from '../components/Header';
 import News from '../components/News';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+const schedules = {
+  '110': require('../redux/Shedules/110.json'),
+  '111': require('../redux/Shedules/111.json'),
+  '112': require('../redux/Shedules/112.json'),
+  '115': require('../redux/Shedules/115.json'),
+  '116': require('../redux/Shedules/116.json'),
+  '118': require('../redux/Shedules/118.json'),
+  '130': require('../redux/Shedules/130.json'),
+  '131': require('../redux/Shedules/131.json'),
+  '132': require('../redux/Shedules/132.json'),
+  '135': require('../redux/Shedules/135.json'),
+  '151': require('../redux/Shedules/151.json'),
+  '161': require('../redux/Shedules/161.json'),
+  '162': require('../redux/Shedules/162.json'),
+  '136': require('../redux/Shedules/136.json'),
+  '210': require('../redux/Shedules/210.json'),
+  '211': require('../redux/Shedules/211.json'),
+  '212': require('../redux/Shedules/212.json'),
+  '213': require('../redux/Shedules/213.json'),
+  '215': require('../redux/Shedules/215.json'),
+  '216': require('../redux/Shedules/216.json'),
+  '231': require('../redux/Shedules/231.json'),
+  '233': require('../redux/Shedules/233.json'),
+  '232': require('../redux/Shedules/232.json'),
+  '235': require('../redux/Shedules/235.json'),
+  '236': require('../redux/Shedules/236.json'),
+  '237': require('../redux/Shedules/237.json'),
+  '251': require('../redux/Shedules/251.json'),
+  '261': require('../redux/Shedules/261.json'),
+  '310': require('../redux/Shedules/310.json'),
+  '311': require('../redux/Shedules/311.json'),
+  '312': require('../redux/Shedules/312.json'),
+  '313': require('../redux/Shedules/313.json'),
+  '315': require('../redux/Shedules/315.json'),
+  '316': require('../redux/Shedules/316.json'),
+  '317': require('../redux/Shedules/317.json'),
+  '331': require('../redux/Shedules/331.json'),
+  '333': require('../redux/Shedules/333.json'),
+  '334': require('../redux/Shedules/334.json'),
+  '332': require('../redux/Shedules/332.json'),
+  '335': require('../redux/Shedules/335.json'),
+  '336': require('../redux/Shedules/336.json'),
+  '337': require('../redux/Shedules/337.json'),
+  '338': require('../redux/Shedules/338.json'),
+  '351': require('../redux/Shedules/351.json'),
+  '361': require('../redux/Shedules/361.json'),
+  '362': require('../redux/Shedules/362.json'),
+  '411': require('../redux/Shedules/411.json'),
+  '413': require('../redux/Shedules/413.json'),
+  '414': require('../redux/Shedules/414.json'),
+  '415': require('../redux/Shedules/415.json'),
+  '416': require('../redux/Shedules/416.json'),
+  '431': require('../redux/Shedules/431.json'),
+  '433': require('../redux/Shedules/433.json'),
+  '434': require('../redux/Shedules/434.json'),
+  '432': require('../redux/Shedules/432.json'),
+  '435': require('../redux/Shedules/435.json'),
+  '436': require('../redux/Shedules/436.json'),
+  '437': require('../redux/Shedules/437.json'),
+  '451': require('../redux/Shedules/451.json'),
+  '461': require('../redux/Shedules/461.json'),
+  '511': require('../redux/Shedules/511.json'),
+  '515': require('../redux/Shedules/515.json'),
+  '531': require('../redux/Shedules/531.json'),
+  '532': require('../redux/Shedules/532.json'),
+  '535': require('../redux/Shedules/535.json'),
+  '536': require('../redux/Shedules/536.json'),
+  '551': require('../redux/Shedules/551.json'),
+  '561': require('../redux/Shedules/561.json')
+};
 
 const scheduleTimes = [
   { period: "1 пара", start: "08:00", end: "09:35" },
@@ -53,46 +128,71 @@ const SelectionModal = ({ title, data, onSelect, onClose }) => (
 );
 
 const MenuScreen = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const { course, group, subgroup, week } = useSelector((state) => state.selectedGroup);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [reminderModalVisible, setReminderModalVisible] = useState(false);
   const [courseModalVisible, setCourseModalVisible] = useState(false);
   const [groupModalVisible, setGroupModalVisible] = useState(false);
   const [subgroupModalVisible, setSubgroupModalVisible] = useState(false);
   const [weekModalVisible, setWeekModalVisible] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState('');
-  const [selectedGroup, setSelectedGroup] = useState('');
-  const [selectedSubgroup, setSelectedSubgroup] = useState('');
-  const [selectedWeek, setSelectedWeek] = useState('');
 
   const handleCourseSelect = (course) => {
-    setSelectedCourse(course);
+    dispatch(setCourse(course));
     setCourseModalVisible(false);
     setGroupModalVisible(true);
   };
 
   const handleGroupSelect = (group) => {
-    setSelectedGroup(group);
+    dispatch(setGroup(group));
     setGroupModalVisible(false);
     setSubgroupModalVisible(true);
   };
 
   const handleSubgroupSelect = (subgroup) => {
-    setSelectedSubgroup(subgroup);
+    dispatch(setSubgroup(subgroup));
     setSubgroupModalVisible(false);
     setWeekModalVisible(true);
   };
 
   const handleWeekSelect = (week) => {
-    setSelectedWeek(week);
+    dispatch(setWeek(week));
     setWeekModalVisible(false);
     setReminderModalVisible(false);
+    generateEvents();
   };
 
   const handleRemoveSelection = () => {
-    setSelectedCourse('');
-    setSelectedGroup('');
-    setSelectedSubgroup('');
-    setSelectedWeek('');
+    dispatch(resetSelection());
+  };
+
+  const generateEvents = () => {
+    const newItems = {};
+    const scheduleData = schedules[group];
+    if (scheduleData && scheduleData[week]) {
+      scheduleData[week].forEach((daySchedule, index) => {
+        daySchedule.classes.forEach((classInfo) => {
+          const eventDate = new Date();
+          eventDate.setDate(eventDate.getDate() + index); // Adjust based on actual schedule date
+          const dateStr = eventDate.toISOString().split('T')[0];
+          const event = {
+            name: classInfo.name,
+            description: classInfo.description,
+            start: classInfo.start,
+            end: classInfo.end,
+            day: dateStr,
+            reminder: null
+          };
+          if (!newItems[dateStr]) {
+            newItems[dateStr] = [];
+          }
+          newItems[dateStr].push(event);
+        });
+      });
+    }
+    dispatch(setEvents(newItems));
   };
 
   return (
@@ -115,12 +215,12 @@ const MenuScreen = () => {
           <Text style={styles.buttonText}> Додати нагадування про пари</Text>
         </TouchableOpacity>
 
-        {selectedCourse && (
+        {course && (
           <View style={styles.selectionContainer}>
-            <Text style={styles.selectionText}>Обраний курс: {selectedCourse}</Text>
-            <Text style={styles.selectionText}>Обрана група: {selectedGroup}</Text>
-            <Text style={styles.selectionText}>Обрана підгрупа: {selectedSubgroup}</Text>
-            <Text style={styles.selectionText}>Поточний тиждень: {selectedWeek}</Text>
+            <Text style={styles.selectionText}>Обраний курс: {course}</Text>
+            <Text style={styles.selectionText}>Обрана група: {group}</Text>
+            <Text style={styles.selectionText}>Обрана підгрупа: {subgroup}</Text>
+            <Text style={styles.selectionText}>Поточний тиждень: {week}</Text>
             <TouchableOpacity onPress={handleRemoveSelection} style={styles.removeButton}>
               <Text style={styles.removeButtonText}>Видалити вибір</Text>
             </TouchableOpacity>
@@ -159,7 +259,7 @@ const MenuScreen = () => {
       {groupModalVisible && (
         <SelectionModal
           title="Оберіть групу"
-          data={courses[selectedCourse]}
+          data={courses[course]}
           onSelect={handleGroupSelect}
           onClose={() => setGroupModalVisible(false)}
         />
@@ -183,9 +283,9 @@ const MenuScreen = () => {
                 style={styles.input}
                 placeholder="Введіть номер тижня"
                 keyboardType="numeric"
-                onChangeText={setSelectedWeek}
+                onChangeText={(text) => dispatch(setWeek(text))}
               />
-              <TouchableOpacity onPress={() => handleWeekSelect(selectedWeek)} style={styles.closeButton}>
+              <TouchableOpacity onPress={() => handleWeekSelect(week)} style={styles.closeButton}>
                 <Text style={styles.closeButtonText}>Підтвердити</Text>
               </TouchableOpacity>
             </View>

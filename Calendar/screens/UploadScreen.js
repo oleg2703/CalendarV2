@@ -97,13 +97,19 @@ const ScheduleApp = () => {
         const course = await AsyncStorage.getItem('@selectedCourse');
         const group = await AsyncStorage.getItem('@selectedGroup');
         if (course) setSelectedCourse(course);
-        if (group) setSelectedGroup(group);
+        if (group) {
+          setSelectedGroup(group);
+          const scheduleData = schedules[group];
+          if (scheduleData) {
+            navigation.navigate('Schedule', { group, scheduleData });
+          }
+        }
       } catch (e) {
         console.error('Error loading data:', e);
       }
     };
     loadData();
-  }, []);
+  }, [navigation]);
 
   const saveSelection = async (course, group) => {
     try {
@@ -170,6 +176,7 @@ const ScheduleApp = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     marginTop: "10%",

@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addEvent, deleteEvent, setReminder, removeReminder } from '../redux/eventsSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { setEvents } from '../redux/eventsSlice';  // Add this line
+
 
 const timeToString = (time) => {
   const date = new Date(time);

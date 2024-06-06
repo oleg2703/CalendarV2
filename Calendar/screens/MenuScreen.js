@@ -161,8 +161,9 @@ const MenuScreen = () => {
     dispatch(setWeek(week));
     setWeekModalVisible(false);
     setReminderModalVisible(false);
-    generateEvents();
-  };
+    navigation.navigate('CalendarScreen', { group, subgroup, week });
+};
+
 
   const handleRemoveSelection = () => {
     dispatch(resetSelection());
@@ -171,17 +172,19 @@ const MenuScreen = () => {
   const generateEvents = () => {
     const newItems = {};
     const scheduleData = schedules[group];
-    if (scheduleData && scheduleData[week]) {
-      scheduleData[week].forEach((daySchedule, index) => {
-        daySchedule.classes.forEach((classInfo) => {
-          const eventDate = new Date();
-          eventDate.setDate(eventDate.getDate() + index); // Adjust based on actual schedule date
+    if (scheduleData && scheduleData[`week${week}`]) {
+      const weekSchedule = scheduleData[`week${week}`];
+      Object.keys(weekSchedule).forEach(day => {
+        const daySchedule = weekSchedule[day];
+        const classes = daySchedule[`subgroup${subgroup}`] || [];
+        classes.forEach(classInfo => {
+          const eventDate = new Date(); // Adjust based on actual schedule date
           const dateStr = eventDate.toISOString().split('T')[0];
           const event = {
-            name: classInfo.name,
-            description: classInfo.description,
-            start: classInfo.start,
-            end: classInfo.end,
+            name: classInfo.subject,
+            description: `${classInfo.type} - ${classInfo.teacher} in room ${classInfo.room}`,
+            start: scheduleTimes[classInfo.number - 1].start,
+            end: scheduleTimes[classInfo.number - 1].end,
             day: dateStr,
             reminder: null
           };

@@ -6,10 +6,10 @@ import Header from '../components/Header';
 import AddEvent from '../components/AddEvent';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { addEvent, deleteEvent, setReminder, removeReminder, setEvents } from '../redux/eventsSlice'; // Ensure setEvents is imported
+import { addEvent, deleteEvent, setReminder, removeReminder, setEvents } from '../redux/eventsSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { schedules, scheduleTimes } from '../redux/Shedules/schedules'; // Import schedules and scheduleTimes
+import { schedules, scheduleTimes } from '../redux/Shedules/schedules';
 
 const timeToString = (time) => {
   const date = new Date(time);
@@ -29,7 +29,6 @@ const CalendarScreen = ({ route }) => {
   useEffect(() => {
     loadEvents();
     setSelectedDate(timeToString(new Date()));
-    console.log('Group:', group, 'Subgroup:', subgroup, 'Week:', week); // Debugging log
     if (group && subgroup && week) {
       generateEvents(group, subgroup, week);
     }
@@ -105,8 +104,8 @@ const CalendarScreen = ({ route }) => {
     const newItems = {};
     const scheduleData = schedules[group];
 
-    if (scheduleData && scheduleData[`week${week}`]) {
-      const weekSchedule = scheduleData[`week${week}`];
+    if (scheduleData && scheduleData.schedule && scheduleData.schedule[`week${week}`]) {
+      const weekSchedule = scheduleData.schedule[`week${week}`];
       const days = Object.keys(weekSchedule);
 
       days.forEach(day => {
@@ -114,9 +113,9 @@ const CalendarScreen = ({ route }) => {
 
         if (daySchedule && daySchedule.length > 0) {
           daySchedule.forEach(classInfo => {
-            const eventDate = new Date();
             const currentDate = new Date();
-            eventDate.setDate(currentDate.getDate() + (days.indexOf(day) - currentDate.getDay() + 1)); // Adjust date to match the correct day of the week
+            const eventDate = new Date(currentDate);
+            eventDate.setDate(currentDate.getDate() + ((days.indexOf(day) - currentDate.getDay() + 1) % 7));
 
             const dateStr = eventDate.toISOString().split('T')[0];
             const event = {
@@ -150,7 +149,7 @@ const CalendarScreen = ({ route }) => {
             <View>
               <Text>{item.name}</Text>
               <Text>{item.description}</Text>
-              <Text>{item.start} - {item.end}</Text> {/* Display event time */}
+              <Text>{item.start} - {item.end}</Text>
             </View>
             <View style={styles.icons}>
               <TouchableOpacity onPress={() => item.reminder ? handleRemoveReminder(item.day, index) : handleSetReminder(item, item.day, index)}>

@@ -6,11 +6,10 @@ import Header from '../components/Header';
 import AddEvent from '../components/AddEvent';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { addEvent, deleteEvent, setReminder, removeReminder } from '../redux/eventsSlice';
+import { addEvent, deleteEvent, setReminder, removeReminder, setEvents } from '../redux/eventsSlice'; // Ensure setEvents is imported
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { setEvents } from '../redux/eventsSlice';  // Add this line
-
+import { schedules, scheduleTimes } from '../redux/Shedules/schedules'; // Import schedules and scheduleTimes
 
 const timeToString = (time) => {
   const date = new Date(time);
@@ -18,6 +17,7 @@ const timeToString = (time) => {
 };
 
 const CalendarScreen = ({ route }) => {
+  const { group, subgroup, week } = route.params || {};
   const items = useSelector((state) => state.events.items);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,7 +29,11 @@ const CalendarScreen = ({ route }) => {
   useEffect(() => {
     loadEvents();
     setSelectedDate(timeToString(new Date()));
-  }, []);
+    console.log('Group:', group, 'Subgroup:', subgroup, 'Week:', week); // Debugging log
+    if (group && subgroup && week) {
+      generateEvents(group, subgroup, week);
+    }
+  }, [group, subgroup, week]);
 
   const saveEventsToStorage = async (events) => {
     try {
@@ -97,6 +101,47 @@ const CalendarScreen = ({ route }) => {
     setRefresh(!refresh);
   };
 
+  const generateEvents = (group, subgroup, week) => {
+    const newItems = {};
+    const scheduleData = schedules[group];
+
+    if (scheduleData && scheduleData[`week${week}`]) {
+      const weekSchedule = scheduleData[`week${week}`];
+      const days = Object.keys(weekSchedule);
+
+      days.forEach(day => {
+        const daySchedule = weekSchedule[day][`subgroup${subgroup}`];
+
+        if (daySchedule && daySchedule.length > 0) {
+          daySchedule.forEach(classInfo => {
+            const eventDate = new Date();
+            const currentDate = new Date();
+            eventDate.setDate(currentDate.getDate() + (days.indexOf(day) - currentDate.getDay() + 1)); // Adjust date to match the correct day of the week
+
+            const dateStr = eventDate.toISOString().split('T')[0];
+            const event = {
+              name: classInfo.subject,
+              description: `${classInfo.type} в кімнаті ${classInfo.room}, викладач: ${classInfo.teacher}`,
+              start: scheduleTimes[classInfo.number - 1].start,
+              end: scheduleTimes[classInfo.number - 1].end,
+              day: dateStr,
+              reminder: null
+            };
+
+            if (!newItems[dateStr]) {
+              newItems[dateStr] = [];
+            }
+            newItems[dateStr].push(event);
+          });
+        }
+      });
+    }
+
+    saveEventsToStorage(newItems);
+    dispatch(setEvents(newItems));
+    setRefresh(!refresh);
+  };
+
   const renderItem = (item, firstItemInDay, index) => (
     <TouchableOpacity key={index}>
       <Card style={styles.item}>
@@ -105,6 +150,7 @@ const CalendarScreen = ({ route }) => {
             <View>
               <Text>{item.name}</Text>
               <Text>{item.description}</Text>
+              <Text>{item.start} - {item.end}</Text> {/* Display event time */}
             </View>
             <View style={styles.icons}>
               <TouchableOpacity onPress={() => item.reminder ? handleRemoveReminder(item.day, index) : handleSetReminder(item, item.day, index)}>

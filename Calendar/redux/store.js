@@ -7,7 +7,11 @@ const store = configureStore({
   reducer: {
     events: eventsReducer,
     selectedGroup: selectedGroupReducer,
-  },
+  },middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // Disable serializable check
+      immutableCheck: false, // Disable immutable check
+    }),
 });
 
 export default store;

@@ -69,7 +69,7 @@ function Schedule() {
       await AsyncStorage.setItem('@confirmedGroup', group);
       await AsyncStorage.setItem('@confirmedSubgroup', selectedSubgroup);
       setIsConfirmed(true);
-      Alert.alert("Розклад підтверджено", `Розклад для групи ${group} підтверджено`);
+      
     } catch (e) {
       console.error('Error confirming schedule:', e);
     }

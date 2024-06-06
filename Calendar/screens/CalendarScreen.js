@@ -27,10 +27,11 @@ const CalendarScreen = ({ route }) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
-    loadEvents();
     setSelectedDate(timeToString(new Date()));
     if (group && subgroup && week) {
       generateEvents(group, subgroup, week);
+    } else {
+      loadEvents();
     }
   }, [group, subgroup, week]);
 
@@ -120,9 +121,8 @@ const CalendarScreen = ({ route }) => {
             const dateStr = eventDate.toISOString().split('T')[0];
             const event = {
               name: classInfo.subject,
-              description: `${classInfo.type} в кімнаті ${classInfo.room}, викладач: ${classInfo.teacher}`,
+              description: `${classInfo.type}  ${classInfo.room}, ${classInfo.teacher}`,
               start: scheduleTimes[classInfo.number - 1].start,
-              end: scheduleTimes[classInfo.number - 1].end,
               day: dateStr,
               reminder: null
             };
@@ -146,10 +146,10 @@ const CalendarScreen = ({ route }) => {
       <Card style={styles.item}>
         <Card.Content>
           <View style={styles.itemContent}>
-            <View>
-              <Text>{item.name}</Text>
+            <View style={styles.titleContainer}>
+              <Text >{item.name}</Text>
               <Text>{item.description}</Text>
-              <Text>{item.start} - {item.end}</Text>
+              <Text>{item.start}</Text>
             </View>
             <View style={styles.icons}>
               <TouchableOpacity onPress={() => item.reminder ? handleRemoveReminder(item.day, index) : handleSetReminder(item, item.day, index)}>
@@ -215,6 +215,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: "10%",
     paddingBottom: 60,
+  },
+  titleContainer:{
+    flex:1
   },
   header: {
     position: 'absolute',

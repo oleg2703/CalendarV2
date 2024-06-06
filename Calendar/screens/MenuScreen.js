@@ -89,7 +89,7 @@ const MenuScreen = () => {
         />
         <Text style={{ fontWeight: "600", fontSize: 24, marginBottom: 0 }}>Щоденник календар ФКНТ</Text>
         <News />
-        <Text style={styles.usefulInfoTitle}>Корисні данні</Text>
+        <Text style={styles.usefulInfoTitle}></Text>
         
         <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.button}>
           <Text style={styles.buttonText}>Дзвінки</Text>
